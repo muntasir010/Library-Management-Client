@@ -4,11 +4,16 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import React from "react";
 
 export default function HomeCarousel() {
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: false })
+  );
   return (
-    <Carousel className="w-full my-8">
+    <Carousel plugins={[plugin.current]} className="w-full my-8">
       <CarouselContent>
         <CarouselItem>
           <img
@@ -35,5 +40,5 @@ export default function HomeCarousel() {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
-  )
+  );
 }
