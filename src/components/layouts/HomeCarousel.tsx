@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
   CarouselContent,
@@ -7,21 +6,31 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 
-export function HomeCarousel() {
+export default function HomeCarousel() {
   return (
-    <Carousel className="w-full max-w-xs">
+    <Carousel className="w-full my-8">
       <CarouselContent>
-        {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index}>
-            <div className="p-1">
-              <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
-                </CardContent>
-              </Card>
-            </div>
-          </CarouselItem>
-        ))}
+        <CarouselItem>
+          <img
+            src="https://i.ibb.co.com/nq3bGsL3/31561.jpg"
+            alt="Slide 1"
+            className=" object-cover rounded-xl w-full max-h-[620px]"
+          />
+        </CarouselItem>
+        <CarouselItem>
+          <img
+            src="https://i.ibb.co.com/Mk2gvDQx/abundant-collection-antique-books-wooden-shelves-generated-by-ai.jpg"
+            alt="Slide 2"
+            className=" object-cover rounded-xl w-full max-h-[620px]"
+          />
+        </CarouselItem>
+        <CarouselItem>
+          <img
+            src="https://i.ibb.co.com/ZRLSVLjF/young-student-looking-book-library.jpg"
+            alt="Slide 3"
+            className=" object-cover rounded-xl w-full max-h-[620px]"
+          />
+        </CarouselItem>
       </CarouselContent>
       <CarouselPrevious />
       <CarouselNext />
