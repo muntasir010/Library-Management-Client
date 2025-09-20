@@ -1,22 +1,36 @@
 import { useState } from "react";
 import { getColumns, type IBook } from "./columns";
-import { useGetBooksQuery } from "@/redux/api/booksCreatedApi";
+import {
+  useDeleteBookMutation,
+  useGetBooksQuery,
+} from "@/redux/api/booksCreatedApi";
 import Spinners from "@/Spinners/Spinners";
 import { DataTable } from "./DataTable";
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import UpdateForm from "../UpdateBook/UpdateBook";
+import toast from "react-hot-toast";
 
 export default function Books() {
   const [editBook, setEditBook] = useState<IBook | null>(null);
   const { data, isLoading } = useGetBooksQuery(undefined);
   const books = data?.data || [];
+  const [deleteBook] = useDeleteBookMutation();
   if (isLoading) {
     return <Spinners />;
   }
 
   const handleEdit = (book: IBook) => {
     setEditBook(book);
+  };
+
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteBook(id).unwrap();
+      toast.success("Book Deleted Successfully");
+    } catch (error) {
+      toast.error("Failed to delete book");
+    }
   };
 
   return (
@@ -28,7 +42,10 @@ export default function Books() {
         </Link>
       </div>
 
-      <DataTable columns={getColumns(handleEdit)} data={books}></DataTable>
+      <DataTable
+        columns={getColumns(handleEdit, handleDelete)}
+        data={books}
+      ></DataTable>
 
       {editBook && (
         <UpdateForm

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { type ColumnDef } from "@tanstack/react-table";
-import { CheckCircle, PenIcon, XCircle } from "lucide-react";
+import { CheckCircle, PenIcon, Trash2, XCircle } from "lucide-react";
 
 export interface IBook {
   _id: string;
@@ -19,7 +19,8 @@ export interface IBook {
   available: boolean;
 }
 export const getColumns = (
-  onEdit: (book: IBook) => void
+  onEdit: (book: IBook) => void,
+  onDelete: (id: string) => void
 ): ColumnDef<IBook>[] => [
   {
     accessorKey: "title",
@@ -63,6 +64,14 @@ export const getColumns = (
         <div>
           <Button size="icon" variant="ghost" onClick={() => onEdit(book)}>
             <PenIcon className="w-4 h-4" />
+          </Button>
+          <Button
+            size="icon"
+            variant="ghost"
+            className="text-red-500"
+            onClick={() => onDelete(book._id)}
+          >
+            <Trash2 className="w-4 h-4" />
           </Button>
         </div>
       );
