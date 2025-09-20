@@ -1,35 +1,15 @@
-import { useState, CSSProperties } from "react";
-import { ClipLoader } from "react-spinners";
 
-const override: CSSProperties = {
-  display: "block",
-  margin: "0 auto",
-  borderColor: "red",
-};
+import { RingLoader } from "react-spinners";
 
 export default function Spinners() {
-  const [loading, setLoading] = useState(true);
-  const [color, setColor] = useState("#ffffff");
-
   return (
-    <div className="sweet-loading">
-      <button onClick={() => setLoading(!loading)}>Toggle Loader</button>
-      <input
-        value={color}
-        onChange={(input) => setColor(input.target.value)}
-        placeholder="Color of the loader"
-      />
-
-      <ClipLoader
-        color={color}
-        loading={loading}
-        cssOverride={override}
-        size={150}
+    <div className="flex justify-center items-center h-screen bg-[#081829]">
+      <RingLoader
+        color="#36d7b7"
+        size={80}
         aria-label="Loading Spinner"
         data-testid="loader"
       />
     </div>
   );
 }
-
-

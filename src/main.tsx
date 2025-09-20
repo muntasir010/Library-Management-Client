@@ -7,8 +7,10 @@ import { Provider } from "react-redux";
 import { store } from "./redux/store.ts";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <div className="bg-[#081829] h-screen pt-16">
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </div>
   </StrictMode>
 );
