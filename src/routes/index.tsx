@@ -1,5 +1,5 @@
 import App from "@/App";
-import AddBook from "@/pages/AddBook/AddBook";
+import AddBook from "@/pages/AddBook/AddBookForm";
 import Books from "@/pages/Books/Books";
 import BorrowSummary from "@/pages/BorrowSummary/BorrowSummary";
 import Home from "@/pages/Home/Home";

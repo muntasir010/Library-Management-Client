@@ -11,7 +11,7 @@ export interface IBook {
     | "SCIENCE"
     | "HISTORY"
     | "BIOGRAPHY"
-    | " FANTASY";
+    | "FANTASY";
   isbn: string;
   description: string;
   copies: number;
