@@ -24,7 +24,6 @@ import toast from "react-hot-toast";
 
 export default function AddForm() {
   const [addBook, { isLoading }] = useAddBookMutation();
-
   const form = useForm<BookFormValues>({
     resolver: zodResolver(bookSchema),
     defaultValues: {
@@ -32,22 +31,19 @@ export default function AddForm() {
       author: "",
       genre: "FICTION",
       isbn: "",
-      description: "",
       copies: 0,
+      description: "",
       available: true,
     },
   });
 
   async function onSubmit(values: BookFormValues) {
-    // const res = await addBook(values);
     try {
-    const res = await addBook(values).unwrap(); 
-    toast.success("Book Added Successfully"); 
-    console.log("Book Added Successfully", res);
-  } catch (error) {
-    toast.error("Failed to add book"); 
-    console.error("Error adding book", error);
-  }
+      const res = await addBook(values).unwrap();
+      toast.success("Book Added Successfully");
+    } catch (error) {
+      toast.error("Failed to add book");
+    }
   }
 
   return (
@@ -127,21 +123,6 @@ export default function AddForm() {
             )}
           />
 
-          {/* Description */}
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Textarea placeholder="Write description..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
           {/* Copies */}
           <FormField
             control={form.control}
@@ -156,6 +137,21 @@ export default function AddForm() {
                     value={field.value}
                     onChange={(e) => field.onChange(Number(e.target.value))}
                   />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Description */}
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Textarea placeholder="Write description..." {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

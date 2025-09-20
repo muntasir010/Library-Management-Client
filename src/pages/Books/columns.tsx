@@ -3,6 +3,7 @@ import { type ColumnDef } from "@tanstack/react-table";
 import { CheckCircle, PenIcon, XCircle } from "lucide-react";
 
 export interface IBook {
+  _id: string;
   title: string;
   author: string;
   genre:
@@ -18,7 +19,7 @@ export interface IBook {
   available: boolean;
 }
 export const getColumns = (
-  onEdit: (item: IBook) => void
+  onEdit: (book: IBook) => void
 ): ColumnDef<IBook>[] => [
   {
     accessorKey: "title",
@@ -57,10 +58,10 @@ export const getColumns = (
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
-      const item = row.original;
+      const book = row.original;
       return (
         <div>
-          <Button size="icon" variant="ghost" onClick={() => onEdit(item)}>
+          <Button size="icon" variant="ghost" onClick={() => onEdit(book)}>
             <PenIcon className="w-4 h-4" />
           </Button>
         </div>

@@ -5,18 +5,18 @@ import Spinners from "@/Spinners/Spinners";
 import { DataTable } from "./DataTable";
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
+import UpdateForm from "../UpdateBook/UpdateBook";
 
-export default function ItemPage() {
-  const [editItem, setEditItem] = useState<IBook | null>(null);
+export default function Books() {
+  const [editBook, setEditBook] = useState<IBook | null>(null);
   const { data, isLoading } = useGetBooksQuery(undefined);
   const books = data?.data || [];
   if (isLoading) {
     return <Spinners />;
   }
 
-  const handleEdit = (item: IBook) => {
-    setEditItem(item);
-    // eventually open modal here
+  const handleEdit = (book: IBook) => {
+    setEditBook(book);
   };
 
   return (
@@ -30,13 +30,13 @@ export default function ItemPage() {
 
       <DataTable columns={getColumns(handleEdit)} data={books}></DataTable>
 
-      {/* {editItem && (
+      {editBook && (
         <UpdateForm
-          item={editItem}
+          book={editBook}
           open={true}
-          onClose={() => setEditItem(null)}
+          onClose={() => setEditBook(null)}
         />
-      )} */}
+      )}
     </div>
   );
 }
