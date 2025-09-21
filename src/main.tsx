@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <div className="bg-[#081829] h-screen pt-16">
+    <div className="bg-[#081829] pt-16">
       <Provider store={store}>
         <RouterProvider router={router} />
         <Toaster position="top-right" reverseOrder={false} />

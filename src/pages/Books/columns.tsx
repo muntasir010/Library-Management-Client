@@ -1,23 +1,9 @@
 import { Button } from "@/components/ui/button";
+import type { IBook } from "@/type";
 import { type ColumnDef } from "@tanstack/react-table";
 import { CheckCircle, PenIcon, Trash2, XCircle } from "lucide-react";
 
-export interface IBook {
-  _id: string;
-  title: string;
-  author: string;
-  genre:
-    | "FICTION"
-    | "NON_FICTION"
-    | "SCIENCE"
-    | "HISTORY"
-    | "BIOGRAPHY"
-    | "FANTASY";
-  isbn: string;
-  description: string;
-  copies: number;
-  available: boolean;
-}
+
 export const getColumns = (
   onEdit: (book: IBook) => void,
   onDelete: (id: string) => void

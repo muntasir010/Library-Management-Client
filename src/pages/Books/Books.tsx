@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getColumns, type IBook } from "./columns";
+import { getColumns } from "./columns";
 import {
   useDeleteBookMutation,
   useGetBooksQuery,
@@ -10,6 +10,7 @@ import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import UpdateForm from "../UpdateBook/UpdateBook";
 import toast from "react-hot-toast";
+import type { IBook } from "@/type";
 
 export default function Books() {
   const [editBook, setEditBook] = useState<IBook | null>(null);

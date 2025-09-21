@@ -4,12 +4,23 @@ import Footer from "./components/layouts/Footer";
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#081829] text-white">
-      <Navbar />
-      <div className="max-w-7xl mx-auto ">
-        <Outlet />
-      </div>
-      <Footer />
+    <div className="flex flex-col min-h-screen bg-[#081829] text-white">
+      {/* Navbar */}
+      <header>
+        <Navbar />
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-grow">
+        <div className="container max-w-7xl mx-auto">
+          <Outlet />
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 }

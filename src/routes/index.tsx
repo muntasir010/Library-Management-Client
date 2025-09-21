@@ -1,7 +1,7 @@
 import App from "@/App";
 import AddBook from "@/pages/AddBook/AddBookForm";
 import Books from "@/pages/Books/Books";
-import BorrowSummary from "@/pages/BorrowSummary/BorrowSummary";
+import BorrowSummary from "@/pages/Borrow/BorrowSummary";
 import Home from "@/pages/Home/Home";
 import { createBrowserRouter } from "react-router";
 export const router = createBrowserRouter([
