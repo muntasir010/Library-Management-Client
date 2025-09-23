@@ -49,27 +49,6 @@ export const BorrowBookModal = ({
   };
 
   return (
-    // <Dialog open={open} onOpenChange={onClose}>
-    //   <DialogContent>
-    //     <DialogHeader>
-    //       <DialogTitle>Borrow {book.title}</DialogTitle>
-    //     </DialogHeader>
-    //     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-    //       <div>
-    //         <label>Quantity</label>
-    //         <input
-    //           type="number"
-    //           {...register("quantity", { required: true })}
-    //         />
-    //       </div>
-    //       <div>
-    //         <label>Due Date</label>
-    //         <input type="date" {...register("dueDate", { required: true })} />
-    //       </div>
-    //       <button type="submit">Submit</button>
-    //     </form>
-    //   </DialogContent>
-    // </Dialog>
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader className="text-2xl">Borrow Book</DialogHeader>
