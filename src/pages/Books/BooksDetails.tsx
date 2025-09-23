@@ -1,12 +1,16 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetBookByIdQuery } from "@/redux/api/booksCreatedApi";
 import { BookDetailsModal } from "./BookDetailsModal";
+import Spinners from "@/Spinners/Spinners";
 
 export default function BooksDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: book } = useGetBookByIdQuery(id as string);
+  const { data: book, isLoading } = useGetBookByIdQuery(id as string);
   if (!book) return null;
+  if (isLoading) {
+    <Spinners />;
+  }
   return (
     <div>
       <BookDetailsModal

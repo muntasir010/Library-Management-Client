@@ -30,6 +30,7 @@ import {
 } from "@/components/ui/select";
 import toast from "react-hot-toast";
 import type { IBook } from "@/type";
+import Spinners from "@/Spinners/Spinners";
 
 // Schema
 const bookSchema = z.object({
@@ -63,7 +64,10 @@ interface UpdateFormProps {
 }
 
 export default function UpdateForm({ book, open, onClose }: UpdateFormProps) {
-  const [updateBook] = useUpdateBookMutation();
+  const [updateBook, { isLoading }] = useUpdateBookMutation();
+  if (isLoading) {
+    <Spinners />;
+  }
   const form = useForm<FormValues>({
     resolver: zodResolver(bookSchema),
     defaultValues: {

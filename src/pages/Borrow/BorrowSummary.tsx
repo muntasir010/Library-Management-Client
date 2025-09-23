@@ -1,4 +1,5 @@
 import { useGetBorrowSummaryQuery } from "@/redux/api/booksCreatedApi";
+import Spinners from "@/Spinners/Spinners";
 import type { BorrowedBookData } from "@/type";
 
 
@@ -7,7 +8,9 @@ export const BorrowSummary = () => {
   const { data: borrowedBooks, isLoading, error } = useGetBorrowSummaryQuery(undefined);
 
 
-if (isLoading) return <div>Loading...</div>;
+if (isLoading) return <div>
+  <Spinners/>
+</div>;
 if (error) return <div>Error: {"message" in error ? error.message : "Something went wrong"}</div>;
 
 

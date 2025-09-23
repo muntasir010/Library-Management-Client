@@ -27,19 +27,38 @@ export default function Navbar() {
         {/* Desktop Links */}
         <div className="hidden sm:flex gap-4 items-center">
           <NavLink
-            className="text-sm md:text-md text-white hover:text-orange-400"
+            // className="text-sm md:text-md text-white hover:text-orange-400"
+            className={({ isActive }) =>
+              `px-3 py-2 rounded-md text-sm font-medium transition-colors text-orange-500 ${
+                isActive
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-700 hover:bg-gray-100"
+              }`
+            }
             to={"/books"}
           >
             All Books
           </NavLink>
           <NavLink
-            className="text-sm md:text-md text-white hover:text-orange-400"
+            className={({ isActive }) =>
+              `px-3 py-2 rounded-md text-sm font-medium transition-colors text-orange-500 ${
+                isActive
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-700 hover:bg-gray-100"
+              }`
+            }
             to={"/borrow-summary"}
           >
             Book Summary
           </NavLink>
           <NavLink
-            className="text-sm md:text-md text-white hover:text-orange-400"
+            className={({ isActive }) =>
+              `px-3 py-2 rounded-md text-sm font-medium transition-colors text-orange-500 ${
+                isActive
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-700 hover:bg-gray-100"
+              }`
+            }
             to={"/create-book"}
           >
             Add Book
@@ -93,21 +112,39 @@ export default function Navbar() {
         {isOpen && (
           <div className="absolute top-16 left-0 w-full bg-[#0f264a] flex flex-col items-center gap-4 py-4 sm:hidden z-50 shadow-lg">
             <NavLink
-              className="text-white hover:text-orange-400"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-md text-sm font-medium transition-colors text-orange-500 ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`
+              }
               to={"/books"}
               onClick={() => setIsOpen(false)}
             >
               All Books
             </NavLink>
             <NavLink
-              className="text-white hover:text-orange-400"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-md text-sm font-medium transition-colors text-orange-500 ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : " hover:bg-gray-100"
+                }`
+              }
               to={"/borrow-summary"}
               onClick={() => setIsOpen(false)}
             >
               Book Summary
             </NavLink>
             <NavLink
-              className="text-white hover:text-orange-400"
+              className={({ isActive }) =>
+                `px-3 py-2 rounded-md text-sm font-medium transition-colors text-orange-500 ${
+                  isActive
+                    ? "bg-blue-600 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`
+              }
               to={"/create-book"}
               onClick={() => setIsOpen(false)}
             >

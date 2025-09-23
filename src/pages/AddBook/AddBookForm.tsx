@@ -22,6 +22,7 @@ import { bookSchema, type BookFormValues } from "./validation";
 import { useAddBookMutation } from "@/redux/api/booksCreatedApi";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import Spinners from "@/Spinners/Spinners";
 
 export default function AddForm() {
   const [addBook, { isLoading }] = useAddBookMutation();
@@ -47,6 +48,10 @@ export default function AddForm() {
     } catch (error) {
       toast.error("Failed to add book");
     }
+  }
+
+  if(isLoading){
+    <Spinners/>
   }
 
   return (
