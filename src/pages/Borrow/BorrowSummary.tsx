@@ -1,50 +1,47 @@
 import { useGetBorrowSummaryQuery } from "@/redux/api/booksCreatedApi";
-import Spinners from "@/Spinners/Spinners";
+import type { BorrowedBookData } from "@/type";
 
-const BorrowSummary = () => {
-  const { data, isLoading, isError } = useGetBorrowSummaryQuery(undefined);
 
-  if (isLoading) return <p className="text-center mt-10">
-    <Spinners/>
-  </p>;
-  if (isError)
-    return (
-      <p className="text-red-500 text-center mt-10">Failed to fetch data.</p>
-    );
+export const BorrowSummary = () => {
 
-  const summary = data?.data || [];
+  const { data: borrowedBooks, isLoading, error } = useGetBorrowSummaryQuery(undefined);
+
+
+if (isLoading) return <div>Loading...</div>;
+if (error) return <div>Error: {"message" in error ? error.message : "Something went wrong"}</div>;
+
 
   return (
-    <div className="container mx-auto mt-10 px-4">
-      <h1 className="text-2xl font-bold mb-6 text-center">Borrow Summary</h1>
-      {summary.length === 0 ? (
-        <p className="text-center">No books have been borrowed yet.</p>
-      ) : (
-        <div className="overflow-x-auto bg-white text-black shadow-2xl rounded-md">
-          <table className="min-w-full  border">
-            <thead>
-              <tr className="bg-orange-400 text-left">
-                <th className="py-3 px-4 border-b">Title</th>
-                <th className="py-3 px-4 border-b">ISBN</th>
-                <th className="py-3 px-4 border-b">Total Quantity Borrowed</th>
+    <div className="mt-20  rounded w-4xl mx-auto bg-gray-100 p-6">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Borrow Summary</h1>
+      <div className="overflow-x-auto bg-white shadow rounded-lg">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Book Title
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                ISBN
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Total Quantity Borrowed
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white text-black divide-y divide-gray-200">
+            {borrowedBooks?.data?.map((data:BorrowedBookData) => (
+              <tr key={data?.book?.isbn} className="hover:bg-gray-50">
+                <td className="px-6 py-4 whitespace-nowrap">{data?.book?.title}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{data?.book?.isbn}</td>
+                <td className="px-6 py-4 whitespace-nowrap font-semibold text-blue-600">
+                  {data?.totalQuantity}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {summary.map((book: any, index: number) => (
-                <tr
-                  key={index}
-                >
-                  <td className="py-2 px-4 border-b">{book.book?.title}</td>
-                  <td className="py-2 px-4 border-b">{book.book?.isbn}</td>
-                  <td className="py-2 px-4 border-b">{book.totalQuantity}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
-  );
-};
-
-export default BorrowSummary;
+  )
+}

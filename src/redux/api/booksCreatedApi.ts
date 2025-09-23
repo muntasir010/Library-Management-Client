@@ -1,3 +1,4 @@
+import type { BorrowedBooksApiResponse, singleBook } from "@/type";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const booksApi = createApi({
@@ -7,6 +8,11 @@ export const booksApi = createApi({
   endpoints: (builder) => ({
     getBooks: builder.query({
       query: () => "/books",
+      providesTags: ["book"],
+    }),
+
+    getBookById: builder.query<singleBook, string>({
+      query: (id) => `/books/${id}`,
       providesTags: ["book"],
     }),
     addBook: builder.mutation({
@@ -32,13 +38,18 @@ export const booksApi = createApi({
       }),
       invalidatesTags: ["book"],
     }),
+    getBorrowedBooks: builder.query<BorrowedBooksApiResponse, void>({
+      query: () => "/borrow",
+      providesTags: ["borrow"],
+    }),
+
     borrowBook: builder.mutation({
-      query: (bookData) => ({
-        url: "/borrow",
+      query: ({ book, quantity, dueDate }) => ({
+        url: `/borrow`,
         method: "POST",
-        body: bookData,
+        body: { book, quantity, dueDate },
       }),
-      invalidatesTags: ["borrow", "book"],
+      invalidatesTags: ["borrow"],
     }),
 
     getBorrowSummary: builder.query({
@@ -55,4 +66,5 @@ export const {
   useDeleteBookMutation,
   useBorrowBookMutation,
   useGetBorrowSummaryQuery,
+  useGetBookByIdQuery,
 } = booksApi;

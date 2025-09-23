@@ -21,9 +21,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { bookSchema, type BookFormValues } from "./validation";
 import { useAddBookMutation } from "@/redux/api/booksCreatedApi";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 
 export default function AddForm() {
   const [addBook, { isLoading }] = useAddBookMutation();
+  const navigate = useNavigate();
   const form = useForm<BookFormValues>({
     resolver: zodResolver(bookSchema),
     defaultValues: {
@@ -41,6 +43,7 @@ export default function AddForm() {
     try {
       const res = await addBook(values).unwrap();
       toast.success("Book Added Successfully");
+      navigate("/books")
     } catch (error) {
       toast.error("Failed to add book");
     }

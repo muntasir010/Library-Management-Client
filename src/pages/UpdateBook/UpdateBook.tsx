@@ -21,7 +21,6 @@ import { useUpdateBookMutation } from "@/redux/api/booksCreatedApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import type { IBook } from "../Books/columns";
 import {
   Select,
   SelectContent,
@@ -30,6 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import toast from "react-hot-toast";
+import type { IBook } from "@/type";
 
 // Schema
 const bookSchema = z.object({

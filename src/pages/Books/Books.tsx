@@ -1,58 +1,50 @@
-import { useState } from "react";
-import { getColumns } from "./columns";
+import { useBookColumns } from "./columns";
+import { DataTable } from "./DataTable";
 import {
   useDeleteBookMutation,
   useGetBooksQuery,
 } from "@/redux/api/booksCreatedApi";
-import Spinners from "@/Spinners/Spinners";
-import { DataTable } from "./DataTable";
-import { Link } from "react-router";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
 import UpdateForm from "../UpdateBook/UpdateBook";
-import toast from "react-hot-toast";
 import type { IBook } from "@/type";
+import { BorrowBookModal } from "../Borrow/BorrowBookModal";
+import Spinners from "@/Spinners/Spinners";
 
 export default function Books() {
-  const [editBook, setEditBook] = useState<IBook | null>(null);
   const { data, isLoading } = useGetBooksQuery(undefined);
-  const books = data?.data || [];
+  const books: IBook[] = data?.data || [];
+
+  const [editBook, setEditBook] = useState<IBook | null>(null);
+  const [borrowBookData, setBorrowBookData] = useState<IBook | null>(null);
   const [deleteBook] = useDeleteBookMutation();
+
+  const columns = useBookColumns({
+    onEdit: (book) => setEditBook(book),
+    onDelete: (id) => deleteBook(id),
+    onBorrow: (book) => setBorrowBookData(book),
+  });
   if (isLoading) {
     return <Spinners />;
   }
-
-  const handleEdit = (book: IBook) => {
-    setEditBook(book);
-  };
-
-  const handleDelete = async (id: string) => {
-    try {
-      await deleteBook(id).unwrap();
-      toast.success("Book Deleted Successfully");
-    } catch (error) {
-      toast.error("Failed to delete book");
-    }
-  };
-
   return (
-    <div className=" my-8">
-      <div className="flex justify-between items-center">
-        <p className="text-3xl text-white my-2"> Books List</p>
-        <Link to={"/create-book"}>
-          <Button>Add Book</Button>
-        </Link>
-      </div>
+    <div>
+      <DataTable columns={columns} data={books} />
 
-      <DataTable
-        columns={getColumns(handleEdit, handleDelete)}
-        data={books}
-      ></DataTable>
-
+      {/* Update Form */}
       {editBook && (
         <UpdateForm
           book={editBook}
           open={true}
           onClose={() => setEditBook(null)}
+        />
+      )}
+
+      {/* Borrow Modal */}
+      {borrowBookData && (
+        <BorrowBookModal
+          book={borrowBookData}
+          open={true}
+          onClose={() => setBorrowBookData(null)}
         />
       )}
     </div>
