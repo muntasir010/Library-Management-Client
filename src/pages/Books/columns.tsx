@@ -8,9 +8,9 @@ import {
 import type { IBook } from "@/type";
 import { type ColumnDef } from "@tanstack/react-table";
 import {
-  BookCheckIcon,
+  BookOpen,
   CheckCircle,
-  ListCheck,
+  Eye,
   PenIcon,
   Trash2,
   XCircle,
@@ -20,6 +20,7 @@ interface Props {
   onEdit: (book: IBook) => void;
   onDelete: (id: string) => void;
   onBorrow: (book: IBook) => void;
+  onDetails: (book: IBook) => void;
 }
 
 export const useBookColumns = ({
@@ -68,7 +69,7 @@ export const useBookColumns = ({
       cell: ({ row }) => {
         const book = row.original;
         return (
-          <div className="flex items-center">
+          <div>
             {/* update book */}
             <TooltipProvider>
               <Tooltip>
@@ -78,7 +79,7 @@ export const useBookColumns = ({
                     variant="ghost"
                     onClick={() => onEdit(book)}
                   >
-                    <PenIcon className="w-4 h-4" />
+                    <PenIcon className="w-4 h-4 text-cyan-500" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -86,39 +87,52 @@ export const useBookColumns = ({
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
+
             {/* book details */}
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
-                    size="icon"
                     variant="ghost"
-                    onClick={() => onEdit(book)}
+                    size="icon"
+                    onClick={() => navigate(`/books/${book._id}`)}
+                    className="text-blue-600"
                   >
-                    <BookCheckIcon className="w-4 h-4 text-emerald-500" />
+                    <Eye className="h-4 w-4 btn btn-ghost text-blue-500" />
                   </Button>
+                  {/* <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => onDetails(book)}
+                  >
+                    <Eye className="h-4 w-4 text-blue-500" />
+                  </Button> */}
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Book Details</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
+
             {/* borrow book */}
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <button
+                  <Button
+                    variant="ghost"
+                    size="icon"
                     onClick={() => navigate(`/borrow/${book._id}`)}
                     className="text-blue-600"
                   >
-                    <ListCheck className="w-4" />
-                  </button>
+                    <BookOpen className="w-4 text-yellow-500" />
+                  </Button>
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>Borrow Book</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
+
             {/* delete book */}
             <TooltipProvider>
               <Tooltip>

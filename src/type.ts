@@ -73,3 +73,9 @@ export interface MyModalProps {
   open: boolean;
   onClose: () => void;
 }
+
+export interface BookDetailsModalProps {
+  book: IBook | null;
+  open: boolean;
+  onClose: () => void;
+}

@@ -9,6 +9,7 @@ import UpdateForm from "../UpdateBook/UpdateBook";
 import type { IBook } from "@/type";
 import { BorrowBookModal } from "../Borrow/BorrowBookModal";
 import Spinners from "@/Spinners/Spinners";
+import { BookDetailsModal } from "./BookDetailsModal";
 
 export default function Books() {
   const { data, isLoading } = useGetBooksQuery(undefined);
@@ -16,12 +17,14 @@ export default function Books() {
 
   const [editBook, setEditBook] = useState<IBook | null>(null);
   const [borrowBookData, setBorrowBookData] = useState<IBook | null>(null);
+  const [detailsBook, setDetailsBook] = useState<IBook | null>(null);
   const [deleteBook] = useDeleteBookMutation();
 
   const columns = useBookColumns({
     onEdit: (book) => setEditBook(book),
     onDelete: (id) => deleteBook(id),
     onBorrow: (book) => setBorrowBookData(book),
+    onDetails: (book) => setDetailsBook(book),
   });
   if (isLoading) {
     return <Spinners />;
@@ -45,6 +48,15 @@ export default function Books() {
           book={borrowBookData}
           open={true}
           onClose={() => setBorrowBookData(null)}
+        />
+      )}
+
+      {/* Details Modal */}
+      {detailsBook && (
+        <BookDetailsModal
+          book={detailsBook}
+          open={true}
+          onClose={() => setDetailsBook(null)}
         />
       )}
     </div>
