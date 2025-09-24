@@ -46,18 +46,18 @@ src/
 │── main.tsx        # React root
 
 ## ⚡ Getting Started
-1️⃣ Clone the Repository
+1️⃣ Clone the Repository  
 git clone https://github.com/your-username/library-management-client.git
-cd library-management-client
-2️⃣ Install Dependencies
-npm install
-3️⃣ Setup Environment Variables
-Create a .env file in the root and add:
-VITE_API_URL=http://localhost:5000/api
-4️⃣ Run the Development Server
-npm run dev
-5️⃣ Build for Production
-npm run build
+cd library-management-client  
+2️⃣ Install Dependencies  
+npm install  
+3️⃣ Setup Environment Variables  
+Create a .env file in the root and add:  
+VITE_API_URL=http://localhost:5000/api  
+4️⃣ Run the Development Server  
+npm run dev  
+5️⃣ Build for Production  
+npm run build  
 
 ## 🔗 API Endpoints Used
 
