@@ -1,69 +1,74 @@
-# React + TypeScript + Vite
+# 📚 Library Management System (Client)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimal and responsive Library Management System built with React, TypeScript, Redux Toolkit Query (RTK Query), and Tailwind CSS.
+This client-side application allows users to manage books, borrow books, and view borrow summaries — all through a clean UI and seamless API integration.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Book Management
+View all books in a table.
+Add new books with proper validation.
+Edit existing book details.
+Delete books with confirmation.
+Book availability updates automatically when copies reach 0.
 
-## Expanding the ESLint configuration
+### Borrow System
+Borrow books with quantity and due date.
+Quantity cannot exceed available copies.
+Updates availability automatically.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Borrow Summary
+Displays all borrowed books with aggregated data.
+Columns: Book Title, ISBN, Total Quantity Borrowed.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### UI/UX
+Responsive and minimalist design.
+Toast notifications for success/error.
+Fixed Navbar & Footer.
+Optimistic UI updates with RTK Query.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### 🛠️ Tech Stack
+Frontend
+⚛️ React (with Vite / CRA)
+📘 TypeScript
+🎯 Redux Toolkit + RTK Query
+🎨 Tailwind CSS + ShadCN UI
+🔔 React Hot Toast
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📂 Project Structure
+src/
+│── components/     # Reusable UI components
+│── pages/          # Page-level components
+│── redux/          # RTK Query APIs and slices
+│── types/          # TypeScript interfaces & types
+│── App.tsx         # App entry point
+│── main.tsx        # React root
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚡ Getting Started
+1️⃣ Clone the Repository
+git clone https://github.com/your-username/library-management-client.git
+cd library-management-client
+2️⃣ Install Dependencies
+npm install
+3️⃣ Setup Environment Variables
+Create a .env file in the root and add:
+VITE_API_URL=http://localhost:5000/api
+4️⃣ Run the Development Server
+npm run dev
+5️⃣ Build for Production
+npm run build
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🔗 API Endpoints Used
+
+### Books
+GET /books → Get all books
+POST /create-book → Add a book
+PATCH /books/:id → Update a book
+DELETE /books/:id → Delete a book
+
+### Borrows
+POST /borrow → Borrow a book
+GET /borrow-summary → Borrow summary
+
+✨ Developed by Naeem.

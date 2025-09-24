@@ -84,9 +84,11 @@ export default function UpdateForm({ book, open, onClose }: UpdateFormProps) {
   const handleSubmit = async (values: FormValues) => {
     try {
       const res = await updateBook({ id: book._id, body: values });
+      console.log(res)
       toast.success("Book Update Successfully");
     } catch (error) {
       toast.error("Failed to updating book");
+      console.log(error)
     }
     onClose();
   };

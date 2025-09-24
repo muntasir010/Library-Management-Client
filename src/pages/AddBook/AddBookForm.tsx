@@ -43,10 +43,12 @@ export default function AddForm() {
   async function onSubmit(values: BookFormValues) {
     try {
       const res = await addBook(values).unwrap();
+      console.log(res)
       toast.success("Book Added Successfully");
       navigate("/books")
     } catch (error) {
       toast.error("Failed to add book");
+      console.log(error)
     }
   }
 
